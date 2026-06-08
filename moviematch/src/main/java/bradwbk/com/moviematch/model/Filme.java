@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
@@ -21,7 +22,7 @@ public class Filme {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_filme;
-    private String titulo_filme;
+    private String tituloFilme;
     private String descricao_filme;
     private Integer duracao_filme;
     private String streaming_filme;
@@ -31,10 +32,10 @@ public class Filme {
     private String atorEspecifico_filme;
     private Integer avaliacao;
 
-
     @ElementCollection
     private List<String> generos;
 
     @ManyToMany(mappedBy = "filmes")
+    @JsonIgnore
     private List<Lista> listas;
 }

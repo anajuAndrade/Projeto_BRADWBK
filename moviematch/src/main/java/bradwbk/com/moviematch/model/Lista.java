@@ -23,7 +23,7 @@ public class Lista {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_lista;
-    private String nome_lista;
+    private String nomeLista;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
