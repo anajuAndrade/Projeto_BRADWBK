@@ -1,4 +1,5 @@
 package bradwbk.com.moviematch.security;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,35 +15,30 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 	private final JwtConfig jwtConfig;
 
-    SecurityConfig(JwtConfig jwtConfig) {
-        this.jwtConfig = jwtConfig;
-    }
+	SecurityConfig(JwtConfig jwtConfig) {
+		this.jwtConfig = jwtConfig;
+	}
 
-    @Bean
+	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) {
 		http
-			// Desativa CSRF para APIs
-			.csrf(csrf -> csrf.disable()) 
-        	// APIs Restful não possuem sessão, logo estamos desativando aqui
-			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-			.authorizeHttpRequests((requests) -> 
-                requests
-						// Essas rotas podem ser acessadas livremente
-						.requestMatchers("/auth/login").permitAll()
-						// Todas as outras precisam de autenticação 
-                        .anyRequest().authenticated()
-			)
-			// Configura para utilizar o jwtDecoder para validar o Token
-			.oauth2ResourceServer(
-				oauth2 -> oauth2.jwt(jwt -> jwtConfig.jwtDecoder())
-			)
-			.logout(LogoutConfigurer::permitAll);
+				.csrf(csrf -> csrf.disable())
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authorizeHttpRequests((requests) -> requests
+						.requestMatchers(
+								"/autenticacao/login",
+								"/usuarios")
+						.permitAll()
+						.anyRequest().authenticated())
+				.oauth2ResourceServer(
+						oauth2 -> oauth2.jwt(jwt -> jwtConfig.jwtDecoder()))
+				.logout(LogoutConfigurer::permitAll);
 
 		return http.build();
 	}
 
 	@Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }

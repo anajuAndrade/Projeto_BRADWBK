@@ -24,9 +24,9 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_usuario;
     private String nome_usuario;
-    private String email_usuario;
+    private String emailUsuario;
     private String nomeDeUsuario_usuario;
-    private String senha_usuario;
+    private String senhaUsuario;
     private LocalDate dataNascimento_usuario;
 
     @ManyToOne

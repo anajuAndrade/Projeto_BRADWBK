@@ -16,18 +16,17 @@ import com.nimbusds.jose.jwk.source.ImmutableSecret;
 public class JwtConfig {
     @Value("${jwt.secret}")
     private String secretKey;
-   
-    @Bean
-    public JwtEncoder jwtEncoder(){
-        return new NimbusJwtEncoder(new ImmutableSecret<>(secretKey.getBytes()));
-    }    
 
     @Bean
-    public JwtDecoder jwtDecoder(){
+    public JwtEncoder jwtEncoder() {
+        return new NimbusJwtEncoder(new ImmutableSecret<>(secretKey.getBytes()));
+    }
+
+    @Bean
+    public JwtDecoder jwtDecoder() {
         SecretKeySpec secretKeySpec = new SecretKeySpec(
-            this.secretKey.getBytes(), 
-            "HmacSHA256"
-        );
+                this.secretKey.getBytes(),
+                "HmacSHA256");
 
         return NimbusJwtDecoder
                 .withSecretKey(secretKeySpec)
@@ -35,6 +34,3 @@ public class JwtConfig {
                 .build();
     }
 }
-
-
-

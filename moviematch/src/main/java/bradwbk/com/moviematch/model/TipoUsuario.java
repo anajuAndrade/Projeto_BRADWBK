@@ -10,6 +10,7 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
@@ -24,5 +25,6 @@ public class TipoUsuario {
     private String nomeTipoUsuario;
 
     @OneToMany(mappedBy = "tipoUsuario")
+    @JsonIgnore
     private List<Usuario> usuarios;
 }

@@ -1,5 +1,8 @@
 package bradwbk.com.moviematch.DTO;
 
-public class AuthDTO {
-    
-}
+import java.time.LocalDateTime;
+
+public record AuthDTO (
+    String token,
+    LocalDateTime expires)
+{}
