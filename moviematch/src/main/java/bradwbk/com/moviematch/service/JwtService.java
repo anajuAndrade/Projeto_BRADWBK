@@ -11,12 +11,12 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
-import bradwbk.com.moviematch.security.JwtConfig;
+import bradwbk.com.moviematch.security.JWTConfig;
 
 @Service
 public class JwtService {
     @Autowired
-    private JwtConfig jwtConfig;
+    private JWTConfig jwtConfig;
     
     final private long expiringSecs = 3600; // 1 hora
 
@@ -24,7 +24,7 @@ public class JwtService {
     private JwtClaimsSet configJwtClaim(Instant time, long expiringSecs, String username) {
         // Configura as informações (Claims) do payload do token
         return JwtClaimsSet.builder()
-                .issuer("sua-aplicacao")
+                .issuer("moviematch")
                 .issuedAt(time)
                 .expiresAt(time.plusSeconds(expiringSecs))
                 .subject(username)

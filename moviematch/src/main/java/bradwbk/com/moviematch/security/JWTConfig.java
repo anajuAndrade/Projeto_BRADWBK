@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
 @Configuration
-public class JwtConfig {
+public class JWTConfig {
     @Value("${jwt.secret}")
     private String secretKey;
 
@@ -25,7 +25,7 @@ public class JwtConfig {
     @Bean
     public JwtDecoder jwtDecoder() {
         SecretKeySpec secretKeySpec = new SecretKeySpec(
-                this.secretKey.getBytes(),
+                this.secretKey.getBytes(), 
                 "HmacSHA256");
 
         return NimbusJwtDecoder

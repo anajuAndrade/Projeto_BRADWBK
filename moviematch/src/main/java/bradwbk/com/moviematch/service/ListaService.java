@@ -38,5 +38,5 @@ public class ListaService {
     public void deletarLista(Long id) {
         listaRepository.deleteById(id);
     }
-
+  
 }

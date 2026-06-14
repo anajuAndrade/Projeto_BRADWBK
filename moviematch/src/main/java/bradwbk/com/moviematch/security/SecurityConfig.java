@@ -13,9 +13,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-	private final JwtConfig jwtConfig;
+	private final JWTConfig jwtConfig;
 
-	SecurityConfig(JwtConfig jwtConfig) {
+	SecurityConfig(JWTConfig jwtConfig) {
 		this.jwtConfig = jwtConfig;
 	}
 
@@ -26,8 +26,9 @@ public class SecurityConfig {
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests((requests) -> requests
 						.requestMatchers(
-								"/autenticacao/login",
-								"/usuarios")
+								"/auth/login",
+								"/auth/register",
+							"/auth/logout")
 						.permitAll()
 						.anyRequest().authenticated())
 				.oauth2ResourceServer(
