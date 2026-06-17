@@ -21,7 +21,6 @@ public class TipoUsuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_tipoUsuario;
-
     private String nomeTipoUsuario;
 
     @OneToMany(mappedBy = "tipoUsuario")
